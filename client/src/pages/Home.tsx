@@ -238,9 +238,9 @@ function SectionLabel({ children }: { children: string }) {
 
 const riskConfig: Record<RiskLevel, { label: string; cls: string }> = {
   CRITICAL: { label: "CRITICAL", cls: "border-red-500/50 bg-red-950/30 text-red-400" },
-  HIGH:     { label: "HIGH",     cls: "border-red-400/35 text-red-300" },
+  HIGH: { label: "HIGH", cls: "border-red-400/35 text-red-300" },
   MODERATE: { label: "MODERATE", cls: "border-yellow-500/35 text-yellow-400" },
-  LOW:      { label: "LOW",      cls: "border-white/12 text-white/40" },
+  LOW: { label: "LOW", cls: "border-white/12 text-white/40" },
 };
 
 function RiskBadge({ risk }: { risk: RiskLevel }) {
@@ -269,9 +269,8 @@ function ToastContainer({ toasts }: { toasts: Toast[] }) {
     <div className="fixed bottom-5 right-5 z-[200] flex flex-col gap-2 items-end">
       {toasts.map(t => (
         <div key={t.id}
-          className={`flex items-center gap-3 rounded-sm border-l-2 bg-zinc-900 px-4 py-3 font-mono text-xs text-white/80 shadow-none transition-all duration-300 ${
-            t.type === "success" ? "border-green-500" : "border-red-500"
-          }`}
+          className={`flex items-center gap-3 rounded-sm border-l-2 bg-zinc-900 px-4 py-3 font-mono text-xs text-white/80 shadow-none transition-all duration-300 ${t.type === "success" ? "border-green-500" : "border-red-500"
+            }`}
           style={{ minWidth: 260, maxWidth: 380 }}>
           {t.msg}
         </div>
@@ -290,7 +289,7 @@ export default function Home() {
   // Compare by Patient ID
   const [cmpId1, setCmpId1] = useState("");
   const [cmpId2, setCmpId2] = useState("");
-  const [cmpLabel, setCmpLabel] = useState<{a: string; b: string}>({ a: "", b: "" });
+  const [cmpLabel, setCmpLabel] = useState<{ a: string; b: string }>({ a: "", b: "" });
 
   // Mutation Recorder
   const [recId, setRecId] = useState("");
@@ -298,7 +297,7 @@ export default function Home() {
   const [recSaved, setRecSaved] = useState(false);
 
   // Manual match
-  const [baseSeq, setBaseSeq]     = useState("");
+  const [baseSeq, setBaseSeq] = useState("");
   const [sampleSeq, setSampleSeq] = useState("");
 
   // Single sequence
@@ -387,7 +386,7 @@ export default function Home() {
       "--------------",
       "#    Pos    Change  Type          AA Effect       Risk      Orig Codon  AA → Mutant AA",
       ...scanResult.mutations.map((m, i) =>
-        `${String(i+1).padEnd(5)} ${String(m.position).padEnd(7)} ${m.original}->${m.mutated}   ${m.mutType.padEnd(14)} ${m.aaEffect.padEnd(16)} ${m.risk.padEnd(10)} ${m.origCodon} ${m.origAA} → ${m.mutAA}`
+        `${String(i + 1).padEnd(5)} ${String(m.position).padEnd(7)} ${m.original}->${m.mutated}   ${m.mutType.padEnd(14)} ${m.aaEffect.padEnd(16)} ${m.risk.padEnd(10)} ${m.origCodon} ${m.origAA} → ${m.mutAA}`
       )
     ];
     const blob = new Blob([lines.join("\n")], { type: "text/plain" });
@@ -401,12 +400,12 @@ export default function Home() {
 
   // ── Patients state ────────────────────────────────────────────
   const [patientTab, setPatientTab] = useState<"lookup" | "register">("lookup");
-  const [lookupId, setLookupId]     = useState("");
+  const [lookupId, setLookupId] = useState("");
   const [foundProfile, setFoundProfile] = useState<ReturnType<typeof getProfile> | null | undefined>(undefined);
-  const [foundMuts, setFoundMuts]   = useState<ReturnType<typeof getMutations> | null>(null);
-  const [regId, setRegId]           = useState("");
-  const [regName, setRegName]       = useState("");
-  const [regDna, setRegDna]         = useState("");
+  const [foundMuts, setFoundMuts] = useState<ReturnType<typeof getMutations> | null>(null);
+  const [regId, setRegId] = useState("");
+  const [regName, setRegName] = useState("");
+  const [regDna, setRegDna] = useState("");
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const patResultsRef = useRef<HTMLDivElement>(null);
 
@@ -572,9 +571,8 @@ export default function Home() {
                 <motion.div variants={fadeUp} className="flex justify-center gap-2">
                   {(["lookup", "register"] as const).map(tab => (
                     <button key={tab} onClick={() => { setPatientTab(tab); setFoundProfile(undefined); setFoundMuts(null); }}
-                      className={`rounded-full border px-6 py-2.5 text-xs uppercase tracking-[0.22em] transition-all duration-200 ${
-                        patientTab === tab ? "border-white/30 bg-white/10 text-white" : "border-white/10 bg-transparent text-white/50 hover:text-white"
-                      }`}>
+                      className={`rounded-full border px-6 py-2.5 text-xs uppercase tracking-[0.22em] transition-all duration-200 ${patientTab === tab ? "border-white/30 bg-white/10 text-white" : "border-white/10 bg-transparent text-white/50 hover:text-white"
+                        }`}>
                       {tab === "lookup" ? "Lookup by ID" : "Register Patient"}
                     </button>
                   ))}
@@ -633,8 +631,8 @@ export default function Home() {
                 <AnimatePresence>
                   {foundProfile && (() => {
                     const stats = foundProfile.dna ? analyseSequence(foundProfile.dna) : null;
-                    const muts  = foundMuts ?? [];
-                    const risk  = computeCancerRisk(muts, stats ?? { length: 0, gc: 50, gcLabel: "Balanced" as const, a: 0, t: 0, g: 0, c: 0, aPct: 0, tPct: 0, gPct: 0, cPct: 0, rnaTranscript: "", codons: [], orfs: [] });
+                    const muts = foundMuts ?? [];
+                    const risk = computeCancerRisk(muts, stats ?? { length: 0, gc: 50, gcLabel: "Balanced" as const, a: 0, t: 0, g: 0, c: 0, aPct: 0, tPct: 0, gPct: 0, cPct: 0, rnaTranscript: "", codons: [], orfs: [] });
                     const riskColor = risk.level === "HIGH" ? "border-red-500/50 bg-red-500/8" : risk.level === "MODERATE" ? "border-yellow-500/40 bg-yellow-500/6" : risk.level === "LOW" ? "border-green-500/30 bg-green-500/5" : "border-white/10 bg-white/2";
                     const riskTextColor = risk.level === "HIGH" ? "text-red-400" : risk.level === "MODERATE" ? "text-yellow-300" : risk.level === "LOW" ? "text-green-400" : "text-white/40";
                     return (
@@ -692,9 +690,8 @@ export default function Home() {
                               </div>
                               <p className={`font-display text-2xl font-bold uppercase tracking-[-0.05em] ${riskTextColor}`}>{risk.headline}</p>
                             </div>
-                            <span className={`rounded-full border px-4 py-2 text-xs uppercase tracking-[0.2em] font-mono font-bold ${riskTextColor} ${
-                              risk.level === "HIGH" ? "border-red-500/40" : risk.level === "MODERATE" ? "border-yellow-500/30" : "border-white/15"
-                            }`}>{risk.level}</span>
+                            <span className={`rounded-full border px-4 py-2 text-xs uppercase tracking-[0.2em] font-mono font-bold ${riskTextColor} ${risk.level === "HIGH" ? "border-red-500/40" : risk.level === "MODERATE" ? "border-yellow-500/30" : "border-white/15"
+                              }`}>{risk.level}</span>
                           </div>
                           <p className="mt-5 text-sm leading-7 text-white/75">{risk.detail}</p>
                           {risk.indicators.length > 0 && (
@@ -721,7 +718,7 @@ export default function Home() {
                               <table className="w-full text-left font-mono text-xs">
                                 <thead>
                                   <tr className="border-b border-white/8 text-white/40">
-                                    {["#","Date","Pos","Change","Type","AA Effect","Risk","AA Change"].map(h => (
+                                    {["#", "Date", "Pos", "Change", "Type", "AA Effect", "Risk", "AA Change"].map(h => (
                                       <th key={h} className="px-4 py-3 font-normal uppercase tracking-[0.18em]">{h}</th>
                                     ))}
                                   </tr>
@@ -779,9 +776,8 @@ export default function Home() {
                     { key: "single" as const, label: "Sequence Analysis", icon: <ClipboardList className="h-3.5 w-3.5" /> },
                   ]).map(tab => (
                     <button key={tab.key} onClick={() => { setAnalyzeTab(tab.key); resetAnalyzer(); }}
-                      className={`inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-xs uppercase tracking-[0.18em] transition-all duration-200 ${
-                        analyzeTab === tab.key ? "border-red-500/40 bg-red-500/10 text-red-300 tab-active-glow" : "border-white/10 bg-transparent text-white/50 hover:text-white hover:border-white/20"
-                      }`}>
+                      className={`inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-xs uppercase tracking-[0.18em] transition-all duration-200 ${analyzeTab === tab.key ? "border-red-500/40 bg-red-500/10 text-red-300 tab-active-glow" : "border-white/10 bg-transparent text-white/50 hover:text-white hover:border-white/20"
+                        }`}>
                       {tab.icon}
                       {tab.label}
                     </button>
@@ -917,8 +913,8 @@ export default function Home() {
                             {[
                               { label: "SIMILARITY", value: `${scanResult.similarity.toFixed(1)}%`, sub: `${scanResult.mutations.length} mut` },
                               { label: "TS/TV", value: scanResult.tsTvRatio.toFixed(2), sub: `Ts:${scanResult.tsCount} Tv:${scanResult.tvCount}` },
-                              { label: cmpLabel.a ? cmpLabel.a.substring(0,12).toUpperCase() : "REF", value: `${scanResult.lengthA}bp`, sub: `GC ${scanResult.gcA.toFixed(1)}%` },
-                              { label: cmpLabel.b ? cmpLabel.b.substring(0,12).toUpperCase() : "SAMPLE", value: `${scanResult.lengthB}bp`, sub: `GC ${scanResult.gcB.toFixed(1)}%` },
+                              { label: cmpLabel.a ? cmpLabel.a.substring(0, 12).toUpperCase() : "REF", value: `${scanResult.lengthA}bp`, sub: `GC ${scanResult.gcA.toFixed(1)}%` },
+                              { label: cmpLabel.b ? cmpLabel.b.substring(0, 12).toUpperCase() : "SAMPLE", value: `${scanResult.lengthB}bp`, sub: `GC ${scanResult.gcB.toFixed(1)}%` },
                             ].map(s => (
                               <div key={s.label} className="border-r border-white/[0.08] last:border-r-0 p-4">
                                 <p className="font-mono text-[9px] tracking-[0.3em] text-white/35 uppercase mb-2">{s.label}</p>
@@ -932,9 +928,9 @@ export default function Home() {
                           <div className="flex flex-wrap gap-2">
                             {([
                               { risk: "CRITICAL" as RiskLevel, count: scanResult.criticalCount },
-                              { risk: "HIGH" as RiskLevel,     count: scanResult.highCount },
+                              { risk: "HIGH" as RiskLevel, count: scanResult.highCount },
                               { risk: "MODERATE" as RiskLevel, count: scanResult.moderateCount },
-                              { risk: "LOW" as RiskLevel,      count: scanResult.lowCount },
+                              { risk: "LOW" as RiskLevel, count: scanResult.lowCount },
                             ]).map(({ risk, count }) => (
                               <div key={risk} className={`flex items-center gap-2 border px-2.5 py-1 rounded-none ${riskConfig[risk].cls}`}>
                                 <span className="font-mono text-[10px] tracking-[0.2em]">{risk}</span>
@@ -976,7 +972,7 @@ export default function Home() {
                                 <table className="w-full text-left font-mono text-xs">
                                   <thead>
                                     <tr className="border-b border-white/8 text-white/40">
-                                      {["#","Pos","Change","Type","AA Effect","Risk","Codon","AA Change"].map(h => (
+                                      {["#", "Pos", "Change", "Type", "AA Effect", "Risk", "Codon", "AA Change"].map(h => (
                                         <th key={h} className="px-4 py-3 font-normal uppercase tracking-[0.18em]">{h}</th>
                                       ))}
                                     </tr>
@@ -1031,13 +1027,13 @@ export default function Home() {
                             <div className="mutatrack-glass rounded-2xl p-6">
                               <p className="micro-label mb-4">Nucleotide Composition</p>
                               <div className="space-y-2">
-                                {(["a","t","g","c"] as const).map(n => (
+                                {(["a", "t", "g", "c"] as const).map(n => (
                                   <div key={n} className="flex items-center gap-3">
                                     <span className="w-4 font-mono text-xs uppercase text-white/50">{n}</span>
                                     <div className="relative h-2 flex-1 overflow-hidden rounded-full bg-white/8">
-                                      <div className={`absolute inset-y-0 left-0 rounded-full ${n === "g" || n === "c" ? "bg-gradient-to-r from-red-500/60 to-red-400/30" : "bg-gradient-to-r from-white/40 to-white/20"}`} style={{ width: `${singleStats[`${n}Pct` as 'aPct'|'tPct'|'gPct'|'cPct']}%` }} />
+                                      <div className={`absolute inset-y-0 left-0 rounded-full ${n === "g" || n === "c" ? "bg-gradient-to-r from-red-500/60 to-red-400/30" : "bg-gradient-to-r from-white/40 to-white/20"}`} style={{ width: `${singleStats[`${n}Pct` as 'aPct' | 'tPct' | 'gPct' | 'cPct']}%` }} />
                                     </div>
-                                    <span className="w-12 text-right font-mono text-xs text-white/60">{singleStats[`${n}Pct` as 'aPct'|'tPct'|'gPct'|'cPct'].toFixed(1)}%</span>
+                                    <span className="w-12 text-right font-mono text-xs text-white/60">{singleStats[`${n}Pct` as 'aPct' | 'tPct' | 'gPct' | 'cPct'].toFixed(1)}%</span>
                                   </div>
                                 ))}
                               </div>
@@ -1049,7 +1045,7 @@ export default function Home() {
                               <div className="max-h-48 overflow-y-auto space-y-1">
                                 {singleStats.codons.map((c, i) => (
                                   <div key={i} className="flex items-center gap-3 font-mono text-xs">
-                                    <span className="text-white/40">{String(i+1).padStart(2,'0')}</span>
+                                    <span className="text-white/40">{String(i + 1).padStart(2, '0')}</span>
                                     <span className="text-white/80">{c.codon}</span>
                                     <span className="text-white/40">→</span>
                                     <span className={c.aa.startsWith("STOP") ? "text-red-400" : "text-white/60"}>{c.aa}</span>
@@ -1060,7 +1056,7 @@ export default function Home() {
                                 <div className="mt-5 border-t border-white/10 pt-4">
                                   <p className="micro-label mb-2">Open Reading Frames</p>
                                   {singleStats.orfs.slice(0, 4).map((o, i) => (
-                                    <p key={i} className="font-mono text-xs text-white/50">ORF {i+1}: start={o.start} stop={o.stop} len={o.length}bp</p>
+                                    <p key={i} className="font-mono text-xs text-white/50">ORF {i + 1}: start={o.start} stop={o.stop} len={o.length}bp</p>
                                   ))}
                                 </div>
                               )}
@@ -1132,7 +1128,7 @@ export default function Home() {
                         Run your first mutation scan and get a free genomic risk report.
                       </p>
                       <a
-                        href="#contact"
+                        href="#analyze"
                         className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/10 transition hover:-translate-y-1 hover:border-red-500/40 hover:bg-red-500/10">
                         <ArrowUpRight className="h-5 w-5 text-white" />
                       </a>
