@@ -1270,17 +1270,41 @@ export default function Home() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={viewport}
-                variants={fadeUp}
-                className="mutatrack-glass rounded-[2rem] px-8 py-12 text-center md:px-12">
-                <SectionLabel>Contact</SectionLabel>
-                <h2 className="font-display text-4xl font-bold uppercase tracking-[-0.06em] md:text-5xl">Get in touch</h2>
-                <p className="mt-4 text-sm text-white/55">Questions about MutaTrack or want to collaborate?</p>
-                <a
-                  href="mailto:tvishathakur16@gmail.com"
-                  className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/6 px-7 py-3.5 text-sm uppercase tracking-[0.22em] text-white transition hover:border-red-500/40 hover:bg-red-500/8">
-                  tvishathakur16@gmail.com
-                  <ArrowUpRight className="h-4 w-4" />
-                </a>
+                variants={stagger}
+                className="mutatrack-glass rounded-[2rem] px-8 py-14 md:px-14">
+                <motion.div variants={fadeUp} className="mb-12 text-center">
+                  <SectionLabel>Contact</SectionLabel>
+                  <h2 className="font-display text-4xl font-bold uppercase tracking-[-0.06em] md:text-5xl">Get in touch</h2>
+                  <p className="mt-4 text-sm text-white/55">Questions about MutaTrack or want to collaborate with the team?</p>
+                </motion.div>
+
+                <motion.div variants={stagger} className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                  {[
+                    { name: "Tvisha Thakur",     email: "tvisha.thakur2025@vitstudent.ac.in",    initials: "TT" },
+                    { name: "Aryan Kothekar",   email: "aryan.kothekar2025@vitstudent.ac.in",   initials: "AK" },
+                    { name: "Someshwar",         email: "someshwar.2025@vitstudent.ac.in",       initials: "S"  },
+                    { name: "Arjun Mishra",      email: "arjun.mishra2025@vitstudent.ac.in",     initials: "AM" },
+                  ].map(({ name, email, initials }) => (
+                    <motion.a
+                      key={email}
+                      variants={fadeUp}
+                      href={`mailto:${email}`}
+                      className="group flex flex-col items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.02] px-6 py-8 text-center transition-all duration-300 hover:border-red-500/30 hover:bg-red-500/[0.04]"
+                    >
+                      {/* Avatar */}
+                      <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/15 bg-white/8 font-display text-lg font-bold uppercase tracking-wider text-white/80 transition-all duration-300 group-hover:border-red-500/40 group-hover:bg-red-500/10 group-hover:text-red-300">
+                        {initials}
+                      </div>
+                      {/* Name */}
+                      <div>
+                        <p className="font-display text-base font-semibold uppercase tracking-[-0.02em] text-white/90">{name}</p>
+                        <p className="mt-2 break-all font-mono text-[11px] leading-5 text-white/40 transition-colors group-hover:text-red-400/70">{email}</p>
+                      </div>
+                      {/* Arrow */}
+                      <ArrowUpRight className="h-4 w-4 text-white/20 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-red-400/60" />
+                    </motion.a>
+                  ))}
+                </motion.div>
               </motion.div>
             </div>
           </section>
