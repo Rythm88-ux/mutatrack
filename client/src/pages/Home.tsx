@@ -1278,12 +1278,13 @@ export default function Home() {
                   <p className="mt-4 text-sm text-white/55">Questions about MutaTrack or want to collaborate with the team?</p>
                 </motion.div>
 
-                <motion.div variants={stagger} className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                <motion.div variants={stagger} className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
                   {[
-                    { name: "Tvisha Thakur",     email: "tvisha.thakur2025@vitstudent.ac.in",    initials: "TT" },
-                    { name: "Aryan Kothekar",   email: "aryan.kothekar2025@vitstudent.ac.in",   initials: "AK" },
-                    { name: "Someshwar",         email: "someshwar.2025@vitstudent.ac.in",       initials: "S"  },
-                    { name: "Arjun Mishra",      email: "arjun.mishra2025@vitstudent.ac.in",     initials: "AM" },
+                    { name: "Tvisha Thakur",     email: "tvisha.thakur2025@vitstudent.ac.in",      initials: "TT" },
+                    { name: "Aryan Kothekar",   email: "aryan.kothekar2025@vitstudent.ac.in",     initials: "AK" },
+                    { name: "Someshwar",         email: "someshwar.2025@vitstudent.ac.in",         initials: "S"  },
+                    { name: "Arjun Mishra",      email: "arjun.mishra2025@vitstudent.ac.in",       initials: "AM" },
+                    { name: "Harsha Kaditya",    email: "harshakaditya.k2025@vitstudent.ac.in",   initials: "HK" },
                   ].map(({ name, email, initials }) => (
                     <motion.a
                       key={email}
